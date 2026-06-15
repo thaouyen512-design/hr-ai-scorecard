@@ -20,9 +20,7 @@ export interface StatsResponse {
   top25: number;
 }
 
-/** Submit one anonymous result to Google Sheets.
- *  Uses no-cors because Apps Script doesn't return CORS headers on POST.
- *  The request still reaches the server — we just can't read the response. */
+/** Submit one anonymous result via Next.js API proxy (avoids CORS + redirect issues on POST) */
 export async function submitResult(payload: {
   fluency: number;
   governance: number;
@@ -33,12 +31,13 @@ export async function submitResult(payload: {
 }): Promise<boolean> {
   if (!APPS_SCRIPT_URL) return false;
   try {
-    await fetch(APPS_SCRIPT_URL, {
+    const res = await fetch("/api/submit", {
       method: "POST",
-      mode: "no-cors",          // bypass CORS — response will be opaque
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
     });
-    return true;                // opaque response = request sent, assume OK
+    const data = await res.json();
+    return data.success === true;
   } catch {
     return false;
   }
