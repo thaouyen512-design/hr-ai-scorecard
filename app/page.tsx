@@ -387,10 +387,84 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Footer */}
-        <footer className="border-t border-slate-100 py-6 text-center text-slate-400 text-sm">
-          Dựa trên dữ liệu từ AIHR HR Trends 2026 · Hỗ trợ HR professionals Việt Nam
-        </footer>
+        {/* Attribution section */}
+        <section className="border-t border-slate-100 bg-slate-50 py-12 px-6">
+          <div className="max-w-4xl mx-auto">
+
+            {/* Experimental disclaimer */}
+            <div className="flex items-start gap-3 bg-amber-50 border border-amber-200
+                            rounded-xl p-4 mb-8">
+              <span className="text-amber-500 text-lg flex-shrink-0 mt-0.5">⚠️</span>
+              <div>
+                <p className="text-amber-800 font-semibold text-sm">Công cụ thử nghiệm phi thương mại</p>
+                <p className="text-amber-700 text-xs mt-1 leading-relaxed">
+                  Đây là web app thử nghiệm được xây dựng cho mục đích học tập và tham khảo,
+                  không phải công cụ đánh giá chính thức. Kết quả mang tính định hướng,
+                  không thay thế tư vấn chuyên môn từ các chuyên gia HR.
+                </p>
+              </div>
+            </div>
+
+            {/* Attribution card */}
+            <div className="bg-white rounded-2xl border border-slate-200 p-6 mb-6">
+              <div className="flex items-center gap-2 mb-4">
+                <span className="w-5 h-5 rounded-md bg-indigo-600 flex items-center justify-center flex-shrink-0">
+                  <svg className="w-3 h-3 text-white" viewBox="0 0 12 12" fill="currentColor">
+                    <path d="M6 1a5 5 0 100 10A5 5 0 006 1zm.5 7.5h-1v-4h1v4zm0-5h-1V2.5h1V3.5z"/>
+                  </svg>
+                </span>
+                <h3 className="font-bold text-slate-800 text-sm">Trích nguồn & Bản quyền</h3>
+              </div>
+
+              <div className="space-y-3 text-sm text-slate-600 leading-relaxed">
+                <p>
+                  Nội dung, dữ liệu thống kê và khung đánh giá trong ứng dụng này được xây dựng
+                  dựa trên nghiên cứu{" "}
+                  <strong className="text-slate-800">
+                    "HR Trends 2026" của AIHR (Academy to Innovate HR)
+                  </strong>
+                  , công bố tại{" "}
+                  <a
+                    href="https://www.aihr.com/blog/hr-trends/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-indigo-600 underline underline-offset-2 hover:text-indigo-800"
+                  >
+                    aihr.com/blog/hr-trends/
+                  </a>
+                  .
+                </p>
+                <p>
+                  Bản quyền dữ liệu, số liệu thống kê và nội dung gốc thuộc về{" "}
+                  <strong className="text-slate-800">© AIHR</strong>. Ứng dụng này không có
+                  liên kết chính thức với AIHR và không sử dụng dữ liệu cho mục đích thương mại.
+                </p>
+                <p>
+                  Nếu bạn muốn đọc báo cáo đầy đủ và chính xác nhất, vui lòng tham khảo trực tiếp
+                  tại trang web của AIHR.
+                </p>
+              </div>
+            </div>
+
+            {/* Bottom bar */}
+            <div className="flex flex-col sm:flex-row items-center justify-between
+                            gap-2 text-xs text-slate-400">
+              <span>HR AI Readiness Scorecard · Công cụ thử nghiệm · Phi thương mại</span>
+              <span>
+                Nguồn:{" "}
+                <a
+                  href="https://www.aihr.com/blog/hr-trends/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-indigo-400 hover:text-indigo-600 underline underline-offset-2"
+                >
+                  AIHR HR Trends 2026
+                </a>
+                {" "}· © AIHR
+              </span>
+            </div>
+          </div>
+        </section>
 
       </div>
     </main>

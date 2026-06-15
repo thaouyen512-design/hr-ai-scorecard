@@ -381,8 +381,54 @@ function ResultsContent() {
             </button>
           </div>
 
+          {/* Experimental + Attribution */}
+          <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5 space-y-4">
+
+            {/* Disclaimer */}
+            <div className="flex items-start gap-3">
+              <span className="text-amber-500 text-base flex-shrink-0 mt-0.5">⚠️</span>
+              <div>
+                <p className="text-sm font-semibold text-slate-700">Web thử nghiệm phi thương mại</p>
+                <p className="text-xs text-slate-500 mt-1 leading-relaxed">
+                  Đây là công cụ thử nghiệm cho mục đích học tập và tham khảo. Kết quả mang tính
+                  định hướng, không phải đánh giá chính thức và không thay thế tư vấn chuyên môn HR.
+                </p>
+              </div>
+            </div>
+
+            <div className="border-t border-slate-200"/>
+
+            {/* Attribution */}
+            <div className="flex items-start gap-3">
+              <span className="text-indigo-400 text-base flex-shrink-0 mt-0.5">📚</span>
+              <div>
+                <p className="text-xs font-semibold text-slate-600 mb-1">Trích nguồn dữ liệu</p>
+                <p className="text-xs text-slate-500 leading-relaxed">
+                  Khung đánh giá và số liệu trong kết quả này dựa trên nghiên cứu{" "}
+                  <strong className="text-slate-600">HR Trends 2026</strong> của{" "}
+                  <strong className="text-slate-600">AIHR (Academy to Innovate HR)</strong>.
+                  Bản quyền dữ liệu gốc thuộc về © AIHR. Ứng dụng không có liên kết chính thức
+                  với AIHR và không sử dụng cho mục đích thương mại.
+                </p>
+                <a
+                  href="https://www.aihr.com/blog/hr-trends/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-xs text-indigo-500
+                             hover:text-indigo-700 mt-1.5 underline underline-offset-2"
+                >
+                  Xem báo cáo gốc tại aihr.com
+                  <svg className="w-3 h-3" viewBox="0 0 12 12" fill="none">
+                    <path d="M2 10 L10 2M5 2 L10 2 L10 7" stroke="currentColor"
+                      strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+
           <p className="text-center text-xs text-slate-400 pb-4">
-            HR AI Readiness Scorecard · AIHR HR Trends 2026 ·{" "}
+            HR AI Readiness Scorecard · Công cụ thử nghiệm · Nguồn: © AIHR HR Trends 2026 ·{" "}
             {new Date().toLocaleDateString("vi-VN")}
           </p>
         </div>
