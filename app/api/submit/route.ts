@@ -1,24 +1,26 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const UPSTASH_URL   = process.env.UPSTASH_REDIS_REST_URL   ?? "";
-const UPSTASH_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN ?? "";
+const APPS_SCRIPT_URL = process.env.NEXT_PUBLIC_APPS_SCRIPT_URL ?? "";
 
+// Uses GET + query params to avoid the POST→GET redirect issue on Apps Script
 export async function POST(req: NextRequest) {
-  if (!UPSTASH_URL || !UPSTASH_TOKEN) {
+  if (!APPS_SCRIPT_URL) {
     return NextResponse.json({ error: "Not configured" }, { status: 503 });
   }
   try {
-    const body  = await req.json();
-    const entry = JSON.stringify({ created_at: new Date().toISOString(), ...body });
+    const body = await req.json();
+    const url  = new URL(APPS_SCRIPT_URL);
+    url.searchParams.set("action",     "submit");
+    url.searchParams.set("fluency",    String(body.fluency));
+    url.searchParams.set("governance", String(body.governance));
+    url.searchParams.set("techstack",  String(body.techstack));
+    url.searchParams.set("change",     String(body.change));
+    url.searchParams.set("total",      String(body.total));
+    url.searchParams.set("maturity",   String(body.maturity));
 
-    const res = await fetch(`${UPSTASH_URL}/pipeline`, {
-      method:  "POST",
-      headers: { Authorization: `Bearer ${UPSTASH_TOKEN}`, "Content-Type": "application/json" },
-      body:    JSON.stringify([["RPUSH", "hr_submissions", entry]]),
-    });
+    const res  = await fetch(url.toString(), { cache: "no-store" });
     const data = await res.json();
-    const ok   = Array.isArray(data) && typeof data[0]?.result === "number" && data[0].result > 0;
-    return NextResponse.json({ success: ok });
+    return NextResponse.json(data);
   } catch (err) {
     return NextResponse.json({ error: String(err) }, { status: 500 });
   }
