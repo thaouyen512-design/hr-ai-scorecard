@@ -89,11 +89,11 @@ function ResultsContent() {
         {/* ── Results hero photo banner ── */}
         <div className="relative h-52 overflow-hidden">
           <img
-            src="https://images.unsplash.com/photo-1543269865-cbf427effbad?w=1600&q=80&fit=crop&auto=format"
-            alt="Happy HR team celebrating after receiving results"
-            className="w-full h-full object-cover object-top"
+            src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1600&q=80&fit=crop&auto=format"
+            alt="Digital data globe — AI and technology visualization"
+            className="w-full h-full object-cover object-center"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-white"/>
+          <div className="absolute inset-0 bg-gradient-to-b from-indigo-900/30 via-transparent to-white"/>
         </div>
 
         {/* ── Hero score banner ── */}
@@ -545,7 +545,7 @@ function ResultsContent() {
               Hình ảnh:{" "}
               <a href="https://unsplash.com" target="_blank" rel="noopener noreferrer"
                  className="underline underline-offset-2 hover:text-slate-600">Unsplash</a>
-              {" "}· Austin Distel
+              {" "}· NASA
             </p>
           </div>
         </div>
