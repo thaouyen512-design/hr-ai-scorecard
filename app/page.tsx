@@ -386,20 +386,25 @@ export default function Home() {
 
         {/* How it works */}
         <section className="relative py-20 overflow-hidden">
-          {/* Background photo with overlay */}
+          {/* Background photo — heavily muted so text is legible */}
           <div className="absolute inset-0">
             <img
               src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&q=80&fit=crop&auto=format"
               alt="Modern open office workspace"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover opacity-20"
             />
-            <div className="absolute inset-0 bg-white/88 backdrop-blur-[2px]"/>
           </div>
+          {/* Solid indigo-50 base so text always has a clean background */}
+          <div className="absolute inset-0 bg-indigo-50/90"/>
+
           <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
-            <span className="text-indigo-600 font-semibold text-sm uppercase tracking-widest">
+            <span className="inline-block bg-indigo-100 text-indigo-700 font-semibold
+                             text-xs uppercase tracking-widest px-3 py-1 rounded-full mb-3">
               Cách thức
             </span>
-            <h2 className="text-3xl font-extrabold text-slate-900 mt-2 mb-12">Chỉ 3 bước đơn giản</h2>
+            <h2 className="text-3xl font-extrabold text-slate-900 mt-0 mb-12">
+              Chỉ 3 bước đơn giản
+            </h2>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {[
@@ -411,9 +416,11 @@ export default function Home() {
                   desc: "Gợi ý hành động cụ thể phù hợp với mức độ hiện tại của bạn." },
               ].map((item) => (
                 <div key={item.step}
-                  className="bg-white rounded-2xl p-8 shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
+                  className="bg-white rounded-2xl p-8 shadow-md border border-indigo-100
+                             hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
                   <div className="w-12 h-12 bg-indigo-600 text-white rounded-xl flex items-center
-                                  justify-center font-extrabold text-lg mb-4 mx-auto">
+                                  justify-center font-extrabold text-lg mb-4 mx-auto
+                                  shadow-lg shadow-indigo-200">
                     {item.step}
                   </div>
                   <h3 className="font-bold text-slate-800 mb-2">{item.title}</h3>
