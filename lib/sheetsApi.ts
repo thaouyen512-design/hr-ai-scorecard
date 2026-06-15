@@ -44,14 +44,11 @@ export async function submitResult(payload: {
   }
 }
 
-/** Fetch aggregate stats from Google Sheets (GET — Apps Script returns CORS on GET) */
+/** Fetch aggregate stats via Next.js API proxy (avoids browser CORS on GET) */
 export async function fetchStats(): Promise<StatsResponse | null> {
   if (!APPS_SCRIPT_URL) return null;
   try {
-    const res = await fetch(
-      `${APPS_SCRIPT_URL}?t=${Date.now()}`,   // cache-bust
-      { cache: "no-store" }
-    );
+    const res = await fetch(`/api/stats?t=${Date.now()}`, { cache: "no-store" });
     return res.ok ? res.json() : null;
   } catch {
     return null;
