@@ -497,10 +497,14 @@ function ResultsContent() {
             <div className="flex items-start gap-3">
               <span className="text-amber-500 text-base flex-shrink-0 mt-0.5">⚠️</span>
               <div>
-                <p className="text-sm font-semibold text-slate-700">Web thử nghiệm phi thương mại</p>
+                <p className="text-sm font-semibold text-slate-700">
+                  Kết quả này chỉ mang tính tham khảo — không dùng cho mục đích chuyên môn
+                </p>
                 <p className="text-xs text-slate-500 mt-1 leading-relaxed">
-                  Đây là công cụ thử nghiệm cho mục đích học tập và tham khảo. Kết quả mang tính
-                  định hướng, không phải đánh giá chính thức và không thay thế tư vấn chuyên môn HR.
+                  Web app được tạo với mục đích <strong>học tập và thử nghiệm cá nhân</strong>.
+                  Kết quả <strong>không phải</strong> đánh giá HR chuyên nghiệp và{" "}
+                  <strong>không thể thay thế</strong> các đánh giá tổ chức do chuyên gia HR
+                  có chứng chỉ thực hiện. Không nên dùng để đưa ra quyết định nhân sự thực tế.
                 </p>
               </div>
             </div>
@@ -511,13 +515,14 @@ function ResultsContent() {
             <div className="flex items-start gap-3">
               <span className="text-indigo-400 text-base flex-shrink-0 mt-0.5">📚</span>
               <div>
-                <p className="text-xs font-semibold text-slate-600 mb-1">Trích nguồn dữ liệu</p>
+                <p className="text-xs font-semibold text-slate-600 mb-1">Trích nguồn & Bản quyền</p>
                 <p className="text-xs text-slate-500 leading-relaxed">
-                  Khung đánh giá và số liệu trong kết quả này dựa trên nghiên cứu{" "}
+                  Số liệu thống kê tham chiếu trong ứng dụng trích từ nghiên cứu{" "}
                   <strong className="text-slate-600">HR Trends 2026</strong> của{" "}
-                  <strong className="text-slate-600">AIHR (Academy to Innovate HR)</strong>.
-                  Bản quyền dữ liệu gốc thuộc về © AIHR. Ứng dụng không có liên kết chính thức
-                  với AIHR và không sử dụng cho mục đích thương mại.
+                  <strong className="text-slate-600">AIHR (Academy to Innovate HR)</strong> —
+                  bản quyền nội dung gốc thuộc về © AIHR. Khung đánh giá 4 chiều là tự xây dựng
+                  dựa trên cảm hứng từ báo cáo AIHR, không phải framework chính thức của AIHR.
+                  Ứng dụng không có liên kết chính thức với AIHR, không dùng cho mục đích thương mại.
                 </p>
                 <a
                   href="https://www.aihr.com/blog/hr-trends/"

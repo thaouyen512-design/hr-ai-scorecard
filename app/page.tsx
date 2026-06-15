@@ -234,7 +234,7 @@ export default function Home() {
           <div className="inline-flex items-center gap-2 bg-indigo-600 text-white
                           px-4 py-1.5 rounded-full text-sm font-medium shadow-lg shadow-indigo-200">
             <span className="w-2 h-2 rounded-full bg-white animate-pulse-soft inline-block"/>
-            HR AI Readiness Scorecard · AIHR Trends 2026
+            HR AI Readiness Scorecard · Công cụ học tập thử nghiệm
           </div>
           <Link href="/dashboard"
             className="inline-flex items-center gap-1.5 text-indigo-600 hover:text-indigo-800
@@ -463,14 +463,17 @@ export default function Home() {
 
             {/* Experimental disclaimer */}
             <div className="flex items-start gap-3 bg-amber-50 border border-amber-200
-                            rounded-xl p-4 mb-8">
-              <span className="text-amber-500 text-lg flex-shrink-0 mt-0.5">⚠️</span>
+                            rounded-xl p-4 mb-6">
+              <span className="text-amber-500 text-xl flex-shrink-0 mt-0.5">⚠️</span>
               <div>
-                <p className="text-amber-800 font-semibold text-sm">Công cụ thử nghiệm phi thương mại</p>
-                <p className="text-amber-700 text-xs mt-1 leading-relaxed">
-                  Đây là web app thử nghiệm được xây dựng cho mục đích học tập và tham khảo,
-                  không phải công cụ đánh giá chính thức. Kết quả mang tính định hướng,
-                  không thay thế tư vấn chuyên môn từ các chuyên gia HR.
+                <p className="text-amber-800 font-semibold text-sm mb-1">
+                  Công cụ học tập thử nghiệm — Không dùng cho mục đích chuyên môn
+                </p>
+                <p className="text-amber-700 text-xs leading-relaxed">
+                  Web app này được tạo với mục đích <strong>học tập, nghiên cứu cá nhân và thử nghiệm
+                  công nghệ</strong>. Đây <strong>không phải</strong> công cụ đánh giá HR chuyên nghiệp
+                  và <strong>không thể thay thế</strong> các đánh giá tổ chức do chuyên gia HR có
+                  chứng chỉ thực hiện. Kết quả chỉ mang tính định hướng tham khảo.
                 </p>
               </div>
             </div>
@@ -488,8 +491,8 @@ export default function Home() {
 
               <div className="space-y-3 text-sm text-slate-600 leading-relaxed">
                 <p>
-                  Nội dung, dữ liệu thống kê và khung đánh giá trong ứng dụng này được xây dựng
-                  dựa trên nghiên cứu{" "}
+                  Các số liệu thống kê được trích dẫn trong ứng dụng (55% công ty tăng ngân sách HR
+                  tech, 35% HR professionals dùng được AI) lấy từ nghiên cứu{" "}
                   <strong className="text-slate-800">
                     "HR Trends 2026" của AIHR (Academy to Innovate HR)
                   </strong>
@@ -505,13 +508,16 @@ export default function Home() {
                   .
                 </p>
                 <p>
-                  Bản quyền dữ liệu, số liệu thống kê và nội dung gốc thuộc về{" "}
-                  <strong className="text-slate-800">© AIHR</strong>. Ứng dụng này không có
-                  liên kết chính thức với AIHR và không sử dụng dữ liệu cho mục đích thương mại.
+                  Khung đánh giá 4 chiều (AI Fluency, Governance, Tech Stack, Change Readiness)
+                  được người tạo ứng dụng xây dựng dựa trên cảm hứng từ các xu hướng nêu trong
+                  báo cáo AIHR, <strong className="text-slate-800">không phải framework chính thức
+                  của AIHR</strong>.
                 </p>
                 <p>
-                  Nếu bạn muốn đọc báo cáo đầy đủ và chính xác nhất, vui lòng tham khảo trực tiếp
-                  tại trang web của AIHR.
+                  Bản quyền số liệu và nội dung gốc thuộc về{" "}
+                  <strong className="text-slate-800">© AIHR</strong>. Ứng dụng này không có
+                  liên kết chính thức với AIHR và không sử dụng dữ liệu cho mục đích thương mại.
+                  Để có đánh giá chính xác và đầy đủ, vui lòng tham khảo trực tiếp tại trang AIHR.
                 </p>
               </div>
             </div>

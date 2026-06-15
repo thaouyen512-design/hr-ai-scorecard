@@ -376,16 +376,25 @@ export default function DashboardPage() {
                 </div>
               </div>
 
-              {/* Disclaimer */}
-              <div className="text-center text-xs text-slate-400 pb-4 space-y-1">
-                <p>Dữ liệu tổng hợp ẩn danh · Không lưu thông tin cá nhân</p>
+              {/* Disclaimer + Attribution */}
+              <div className="rounded-xl border border-amber-200 bg-amber-50 p-4 text-xs
+                              text-amber-800 leading-relaxed mb-2">
+                <p className="font-semibold mb-1">⚠️ Dữ liệu minh họa — Công cụ học tập thử nghiệm</p>
                 <p>
-                  Nguồn khung đánh giá:{" "}
+                  Dashboard này chỉ phục vụ mục đích <strong>học tập và thử nghiệm</strong>.
+                  Dữ liệu được thu thập ẩn danh từ người dùng tự nguyện, không có giá trị
+                  thống kê hay nghiên cứu chính thức. Không lưu thông tin cá nhân.
+                </p>
+              </div>
+              <div className="text-center text-xs text-slate-400 pb-4 space-y-1">
+                <p>
+                  Số liệu tham chiếu từ{" "}
                   <a href="https://www.aihr.com/blog/hr-trends/"
                     target="_blank" rel="noopener noreferrer"
                     className="text-indigo-400 hover:text-indigo-600 underline underline-offset-2">
                     AIHR HR Trends 2026
                   </a>
+                  {" "}· © AIHR · Khung 4 chiều tự xây dựng, không phải framework chính thức AIHR
                 </p>
               </div>
             </div>
