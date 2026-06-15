@@ -183,9 +183,9 @@ const DIMS = [
     desc:        "Kiểm tra policy, quy trình kiểm soát bias và tính minh bạch khi dùng AI trong HR.",
     card:        "border-sky-200 from-sky-50",
     tag:         "bg-sky-100 text-sky-700",
-    photo:       "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&q=80&fit=crop&auto=format",
-    photoAlt:    "Reviewing AI policy documents",
-    photoCredit: "Helloquence",
+    photo:       "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&q=80&fit=crop&auto=format",
+    photoAlt:    "Digital cybersecurity and AI governance concept",
+    photoCredit: "Philipp Katzenberger",
   },
   {
     icon:        <IconTechStack/>,
@@ -536,7 +536,7 @@ export default function Home() {
                   >
                     Unsplash
                   </a>
-                  {" "}· Scott Graham, Helloquence, Marvin Meyer, You X Ventures, Austin Distel
+                  {" "}· Scott Graham, Philipp Katzenberger, Marvin Meyer, You X Ventures, Austin Distel
                 </span>
               </div>
             </div>
