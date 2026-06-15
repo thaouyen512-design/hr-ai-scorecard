@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { Suspense } from "react";
+import { Suspense, useState } from "react";
 import Link from "next/link";
 import {
   RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis,
@@ -10,6 +10,7 @@ import {
 import { DIMENSIONS } from "@/data/questions";
 import { calcScores, getMaturity, scoreToPercent } from "@/lib/scoring";
 import { getRecs } from "@/data/recommendations";
+import { submitResult, APPS_SCRIPT_URL } from "@/lib/sheetsApi";
 import type { AssessmentAnswers, DimensionId } from "@/types";
 
 /* Maturity level → icon */
@@ -22,6 +23,7 @@ const MATURITY_ICONS: Record<string, string> = {
 
 function ResultsContent() {
   const searchParams = useSearchParams();
+  const [contributed, setContributed] = useState<"idle"|"loading"|"done"|"error">("idle");
 
   const answers: AssessmentAnswers = {
     fluency:    searchParams.get("fluency")?.split(",").map(Number)    ?? [],
@@ -32,6 +34,19 @@ function ResultsContent() {
 
   const scores   = calcScores(answers);
   const maturity = getMaturity(scores.total);
+
+  async function handleContribute() {
+    setContributed("loading");
+    const ok = await submitResult({
+      fluency:    scores.dimensions.fluency,
+      governance: scores.dimensions.governance,
+      techstack:  scores.dimensions.techstack,
+      change:     scores.dimensions.change,
+      total:      scores.total,
+      maturity:   maturity.level,
+    });
+    setContributed(ok ? "done" : "error");
+  }
 
   const radarData = DIMENSIONS.map((d) => ({
     dimension: d.label,
@@ -352,6 +367,90 @@ function ResultsContent() {
             </div>
             <p className="text-xs text-slate-400 mt-4">* Nguồn: AIHR HR Trends Report 2026</p>
           </div>
+
+          {/* ── Contribute to community ── */}
+          {APPS_SCRIPT_URL && contributed === "idle" && (
+            <div className="rounded-2xl border border-indigo-100 bg-indigo-50 p-5
+                            flex flex-col sm:flex-row items-start sm:items-center
+                            gap-4 print:hidden">
+              <div className="flex-1">
+                <p className="text-sm font-semibold text-indigo-900">
+                  Đóng góp kết quả ẩn danh cho cộng đồng?
+                </p>
+                <p className="text-xs text-indigo-600 mt-0.5">
+                  Chỉ lưu điểm số · Không lưu tên, email hay bất kỳ thông tin cá nhân nào
+                </p>
+              </div>
+              <div className="flex gap-2 flex-shrink-0">
+                <button
+                  onClick={handleContribute}
+                  className="px-4 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white
+                             text-sm font-semibold rounded-xl transition-all shadow-md
+                             shadow-indigo-200 flex items-center gap-1.5"
+                >
+                  <span>✓</span> Đóng góp
+                </button>
+                <Link href="/dashboard"
+                  className="px-4 py-2.5 bg-white border border-indigo-200 text-indigo-600
+                             text-sm font-semibold rounded-xl hover:bg-indigo-50
+                             transition-all flex items-center gap-1.5">
+                  Xem Dashboard →
+                </Link>
+              </div>
+            </div>
+          )}
+
+          {APPS_SCRIPT_URL && contributed === "loading" && (
+            <div className="rounded-2xl border border-indigo-100 bg-indigo-50 p-5
+                            flex items-center gap-3 text-indigo-700 text-sm print:hidden">
+              <div className="w-5 h-5 border-2 border-indigo-300 border-t-indigo-600
+                              rounded-full animate-spin flex-shrink-0"/>
+              Đang lưu kết quả...
+            </div>
+          )}
+
+          {APPS_SCRIPT_URL && contributed === "done" && (
+            <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-5
+                            flex items-center justify-between gap-4 print:hidden">
+              <div className="flex items-center gap-2.5 text-sm text-emerald-800">
+                <span className="text-lg">✅</span>
+                <div>
+                  <p className="font-semibold">Cảm ơn bạn đã đóng góp!</p>
+                  <p className="text-xs text-emerald-600 mt-0.5">
+                    Kết quả đã được lưu ẩn danh vào cộng đồng.
+                  </p>
+                </div>
+              </div>
+              <Link href="/dashboard"
+                className="flex-shrink-0 px-4 py-2 bg-emerald-600 hover:bg-emerald-700
+                           text-white text-xs font-semibold rounded-xl transition-all">
+                Xem Dashboard →
+              </Link>
+            </div>
+          )}
+
+          {APPS_SCRIPT_URL && contributed === "error" && (
+            <div className="rounded-2xl border border-red-200 bg-red-50 p-4
+                            flex items-center gap-2.5 text-sm text-red-700 print:hidden">
+              <span>⚠️</span>
+              Không thể lưu lúc này. Vui lòng thử lại sau.
+            </div>
+          )}
+
+          {/* Shortcut to dashboard even without contributing */}
+          {!APPS_SCRIPT_URL && (
+            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4
+                            flex items-center justify-between gap-4 print:hidden">
+              <p className="text-sm text-slate-500">
+                Xem xu hướng kết quả từ cộng đồng HR
+              </p>
+              <Link href="/dashboard"
+                className="flex-shrink-0 px-4 py-2 bg-indigo-600 hover:bg-indigo-700
+                           text-white text-xs font-semibold rounded-xl transition-all">
+                Dashboard →
+              </Link>
+            </div>
+          )}
 
           {/* ── Action buttons ── */}
           <div className="flex flex-wrap gap-3 print:hidden pb-4">

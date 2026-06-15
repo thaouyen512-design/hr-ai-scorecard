@@ -217,12 +217,19 @@ export default function Home() {
       <div className="relative z-10">
 
         {/* Header badge */}
-        <header className="flex justify-center pt-10 pb-4 px-4">
+        <header className="flex flex-col sm:flex-row items-center justify-center
+                           gap-3 pt-10 pb-4 px-4">
           <div className="inline-flex items-center gap-2 bg-indigo-600 text-white
                           px-4 py-1.5 rounded-full text-sm font-medium shadow-lg shadow-indigo-200">
             <span className="w-2 h-2 rounded-full bg-white animate-pulse-soft inline-block"/>
             HR AI Readiness Scorecard · AIHR Trends 2026
           </div>
+          <Link href="/dashboard"
+            className="inline-flex items-center gap-1.5 text-indigo-600 hover:text-indigo-800
+                       bg-indigo-50 hover:bg-indigo-100 border border-indigo-200
+                       px-3 py-1.5 rounded-full text-xs font-semibold transition-all">
+            <span>📊</span> Dashboard cộng đồng
+          </Link>
         </header>
 
         {/* Hero: 2-column */}
