@@ -86,8 +86,18 @@ function ResultsContent() {
 
       <div className="relative z-10">
 
+        {/* ── Results hero photo banner ── */}
+        <div className="relative h-52 overflow-hidden">
+          <img
+            src="https://images.unsplash.com/photo-1543269865-cbf427effbad?w=1600&q=80&fit=crop&auto=format"
+            alt="Happy HR team celebrating after receiving results"
+            className="w-full h-full object-cover object-top"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-white"/>
+        </div>
+
         {/* ── Hero score banner ── */}
-        <div className="px-4 pt-12 pb-10 text-center animate-fade-in">
+        <div className="px-4 pt-2 pb-10 text-center animate-fade-in">
           <div className="max-w-2xl mx-auto">
             <Link href="/" className="inline-flex items-center gap-1.5 text-slate-400
                                       hover:text-slate-600 text-sm mb-6 transition-colors">
@@ -526,10 +536,18 @@ function ResultsContent() {
             </div>
           </div>
 
-          <p className="text-center text-xs text-slate-400 pb-4">
-            HR AI Readiness Scorecard · Công cụ thử nghiệm · Nguồn: © AIHR HR Trends 2026 ·{" "}
-            {new Date().toLocaleDateString("vi-VN")}
-          </p>
+          <div className="text-center text-xs text-slate-400 pb-4 space-y-1">
+            <p>
+              HR AI Readiness Scorecard · Công cụ thử nghiệm · Nguồn: © AIHR HR Trends 2026 ·{" "}
+              {new Date().toLocaleDateString("vi-VN")}
+            </p>
+            <p>
+              Hình ảnh:{" "}
+              <a href="https://unsplash.com" target="_blank" rel="noopener noreferrer"
+                 className="underline underline-offset-2 hover:text-slate-600">Unsplash</a>
+              {" "}· Austin Distel
+            </p>
+          </div>
         </div>
       </div>
 

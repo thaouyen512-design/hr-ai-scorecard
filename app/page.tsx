@@ -44,8 +44,8 @@ const IconChange = () => (
   </svg>
 );
 
-/* ── Hero SVG Illustration ── */
-const HeroIllustration = () => (
+/* ── Hero SVG Illustration (kept as fallback, not rendered) ── */
+const _HeroIllustration = () => (
   <svg viewBox="0 0 480 420" className="w-full max-w-lg" fill="none">
     <defs>
       <filter id="card-shadow" x="-20%" y="-20%" width="140%" height="140%">
@@ -166,36 +166,48 @@ const STATS = [
 /* ── Dimensions ── */
 const DIMS = [
   {
-    icon: <IconFluency/>,
-    en: "AI Fluency",
-    vi: "Kỹ năng AI của Team",
-    desc: "Đo lường khả năng HR professionals hiểu và sử dụng AI trong công việc hàng ngày.",
-    card: "border-indigo-200 from-indigo-50",
-    tag:  "bg-indigo-100 text-indigo-700",
+    icon:        <IconFluency/>,
+    en:          "AI Fluency",
+    vi:          "Kỹ năng AI của Team",
+    desc:        "Đo lường khả năng HR professionals hiểu và sử dụng AI trong công việc hàng ngày.",
+    card:        "border-indigo-200 from-indigo-50",
+    tag:         "bg-indigo-100 text-indigo-700",
+    photo:       "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=600&q=80&fit=crop&auto=format",
+    photoAlt:    "Trainer teaching AI tools to a group of HR professionals",
+    photoCredit: "Scott Graham",
   },
   {
-    icon: <IconGovernance/>,
-    en: "AI Governance",
-    vi: "Quản trị & Đạo đức AI",
-    desc: "Kiểm tra policy, quy trình kiểm soát bias và tính minh bạch khi dùng AI trong HR.",
-    card: "border-sky-200 from-sky-50",
-    tag:  "bg-sky-100 text-sky-700",
+    icon:        <IconGovernance/>,
+    en:          "AI Governance",
+    vi:          "Quản trị & Đạo đức AI",
+    desc:        "Kiểm tra policy, quy trình kiểm soát bias và tính minh bạch khi dùng AI trong HR.",
+    card:        "border-sky-200 from-sky-50",
+    tag:         "bg-sky-100 text-sky-700",
+    photo:       "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&q=80&fit=crop&auto=format",
+    photoAlt:    "Reviewing AI policy documents",
+    photoCredit: "Helloquence",
   },
   {
-    icon: <IconTechStack/>,
-    en: "Tech Stack",
-    vi: "Hạ tầng Công nghệ",
-    desc: "Đánh giá mức độ tích hợp AI trong HRIS, ATS và toàn bộ hệ thống HR hiện có.",
-    card: "border-emerald-200 from-emerald-50",
-    tag:  "bg-emerald-100 text-emerald-700",
+    icon:        <IconTechStack/>,
+    en:          "Tech Stack",
+    vi:          "Hạ tầng Công nghệ",
+    desc:        "Đánh giá mức độ tích hợp AI trong HRIS, ATS và toàn bộ hệ thống HR hiện có.",
+    card:        "border-emerald-200 from-emerald-50",
+    tag:         "bg-emerald-100 text-emerald-700",
+    photo:       "https://images.unsplash.com/photo-1551434678-e076c223a692?w=600&q=80&fit=crop&auto=format",
+    photoAlt:    "Laptop with HR technology dashboard",
+    photoCredit: "Marvin Meyer",
   },
   {
-    icon: <IconChange/>,
-    en: "Change Readiness",
-    vi: "Sẵn sàng Thay đổi",
-    desc: "Đo lường sự ủng hộ lãnh đạo, thái độ nhân viên và lộ trình chuyển đổi AI.",
-    card: "border-amber-200 from-amber-50",
-    tag:  "bg-amber-100 text-amber-700",
+    icon:        <IconChange/>,
+    en:          "Change Readiness",
+    vi:          "Sẵn sàng Thay đổi",
+    desc:        "Đo lường sự ủng hộ lãnh đạo, thái độ nhân viên và lộ trình chuyển đổi AI.",
+    card:        "border-amber-200 from-amber-50",
+    tag:         "bg-amber-100 text-amber-700",
+    photo:       "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80&fit=crop&auto=format",
+    photoAlt:    "Leader presenting change initiative to HR team",
+    photoCredit: "You X Ventures",
   },
 ];
 
@@ -286,9 +298,32 @@ export default function Home() {
             </Link>
           </div>
 
-          {/* Right: SVG illustration */}
+          {/* Right: hero photo */}
           <div className="flex-1 flex justify-center animate-fade-in-delay">
-            <HeroIllustration/>
+            <div className="relative w-full max-w-lg">
+              <img
+                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80&fit=crop&auto=format"
+                alt="HR team collaborating with AI tools around a laptop"
+                className="rounded-2xl shadow-2xl shadow-indigo-100 w-full object-cover h-[420px]"
+              />
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-indigo-900/10 to-transparent pointer-events-none"/>
+              {/* floating badge */}
+              <div className="absolute bottom-5 left-5 bg-white/95 backdrop-blur-sm
+                              rounded-xl px-4 py-2.5 shadow-lg flex items-center gap-2.5">
+                <span className="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center flex-shrink-0">
+                  <svg className="w-4 h-4 text-white" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969
+                      0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755
+                      1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1
+                      1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                  </svg>
+                </span>
+                <div>
+                  <div className="text-xs font-bold text-slate-800">AI Readiness Score</div>
+                  <div className="text-xs text-slate-500">4 chiều · 20 câu hỏi</div>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -321,25 +356,46 @@ export default function Home() {
             {DIMS.map((d) => (
               <div
                 key={d.en}
-                className={`rounded-2xl border p-6 bg-gradient-to-br ${d.card} to-white
+                className={`rounded-2xl border overflow-hidden bg-gradient-to-br ${d.card} to-white
                             transition-all duration-300 hover:-translate-y-1.5
                             hover:shadow-xl hover:shadow-slate-100`}
               >
-                <div className="mb-4">{d.icon}</div>
-                <span className={`text-xs font-semibold px-2 py-0.5 rounded-full
-                                  ${d.tag} mb-3 inline-block`}>
-                  {d.en}
-                </span>
-                <h3 className="font-bold text-slate-800 text-base mb-2">{d.vi}</h3>
-                <p className="text-slate-500 text-sm leading-relaxed">{d.desc}</p>
+                {/* Card photo */}
+                <div className="h-36 overflow-hidden relative">
+                  <img
+                    src={d.photo}
+                    alt={d.photoAlt}
+                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/20"/>
+                </div>
+                {/* Card body */}
+                <div className="p-5">
+                  <div className="mb-3">{d.icon}</div>
+                  <span className={`text-xs font-semibold px-2 py-0.5 rounded-full
+                                    ${d.tag} mb-3 inline-block`}>
+                    {d.en}
+                  </span>
+                  <h3 className="font-bold text-slate-800 text-base mb-2">{d.vi}</h3>
+                  <p className="text-slate-500 text-sm leading-relaxed">{d.desc}</p>
+                </div>
               </div>
             ))}
           </div>
         </section>
 
         {/* How it works */}
-        <section className="bg-slate-50 py-20">
-          <div className="max-w-4xl mx-auto px-6 text-center">
+        <section className="relative py-20 overflow-hidden">
+          {/* Background photo with overlay */}
+          <div className="absolute inset-0">
+            <img
+              src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&q=80&fit=crop&auto=format"
+              alt="Modern open office workspace"
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-white/88 backdrop-blur-[2px]"/>
+          </div>
+          <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
             <span className="text-indigo-600 font-semibold text-sm uppercase tracking-widest">
               Cách thức
             </span>
@@ -457,18 +513,32 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row items-center justify-between
                             gap-2 text-xs text-slate-400">
               <span>HR AI Readiness Scorecard · Công cụ thử nghiệm · Phi thương mại</span>
-              <span>
-                Nguồn:{" "}
-                <a
-                  href="https://www.aihr.com/blog/hr-trends/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-indigo-400 hover:text-indigo-600 underline underline-offset-2"
-                >
-                  AIHR HR Trends 2026
-                </a>
-                {" "}· © AIHR
-              </span>
+              <div className="flex flex-col items-end gap-1 text-right">
+                <span>
+                  Nguồn:{" "}
+                  <a
+                    href="https://www.aihr.com/blog/hr-trends/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-indigo-400 hover:text-indigo-600 underline underline-offset-2"
+                  >
+                    AIHR HR Trends 2026
+                  </a>
+                  {" "}· © AIHR
+                </span>
+                <span>
+                  Hình ảnh:{" "}
+                  <a
+                    href="https://unsplash.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-slate-400 hover:text-slate-600 underline underline-offset-2"
+                  >
+                    Unsplash
+                  </a>
+                  {" "}· Scott Graham, Helloquence, Marvin Meyer, You X Ventures, Austin Distel
+                </span>
+              </div>
             </div>
           </div>
         </section>
