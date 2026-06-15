@@ -1,5 +1,4 @@
-// Google Apps Script Web App URL — filled in after deploy
-export const APPS_SCRIPT_URL = process.env.NEXT_PUBLIC_APPS_SCRIPT_URL ?? "";
+// Community feature routes through Next.js API → Upstash Redis (no CORS, no Apps Script)
 
 export interface StatsResponse {
   count: number;
@@ -20,7 +19,6 @@ export interface StatsResponse {
   top25: number;
 }
 
-/** Submit one anonymous result via Next.js API proxy (avoids CORS + redirect issues on POST) */
 export async function submitResult(payload: {
   fluency: number;
   governance: number;
@@ -29,12 +27,11 @@ export async function submitResult(payload: {
   total: number;
   maturity: string;
 }): Promise<boolean> {
-  if (!APPS_SCRIPT_URL) return false;
   try {
-    const res = await fetch("/api/submit", {
-      method: "POST",
+    const res  = await fetch("/api/submit", {
+      method:  "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
+      body:    JSON.stringify(payload),
     });
     const data = await res.json();
     return data.success === true;
@@ -43,9 +40,7 @@ export async function submitResult(payload: {
   }
 }
 
-/** Fetch aggregate stats via Next.js API proxy (avoids browser CORS on GET) */
 export async function fetchStats(): Promise<StatsResponse | null> {
-  if (!APPS_SCRIPT_URL) return null;
   try {
     const res = await fetch(`/api/stats?t=${Date.now()}`, { cache: "no-store" });
     return res.ok ? res.json() : null;

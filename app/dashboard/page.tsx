@@ -9,7 +9,7 @@ import {
 } from "recharts";
 import { DIMENSIONS } from "@/data/questions";
 import { getMaturity } from "@/lib/scoring";
-import { fetchStats, APPS_SCRIPT_URL } from "@/lib/sheetsApi";
+import { fetchStats } from "@/lib/sheetsApi";
 import type { StatsResponse } from "@/lib/sheetsApi";
 import type { DimensionId } from "@/types";
 
@@ -64,31 +64,11 @@ function EmptyState() {
   );
 }
 
-/* ── Not configured state ── */
-function NotConfigured() {
-  return (
-    <div className="flex flex-col items-center justify-center py-24 text-center">
-      <div className="w-16 h-16 bg-amber-100 rounded-2xl flex items-center justify-center mb-4 text-3xl">
-        ⚙️
-      </div>
-      <h3 className="font-bold text-slate-800 text-lg mb-2">Chưa kết nối Google Sheets</h3>
-      <p className="text-slate-500 text-sm max-w-sm">
-        Dashboard này cần biến môi trường{" "}
-        <code className="bg-slate-100 px-1.5 py-0.5 rounded text-xs font-mono text-slate-700">
-          NEXT_PUBLIC_APPS_SCRIPT_URL
-        </code>{" "}
-        được cấu hình trên Vercel.
-      </p>
-    </div>
-  );
-}
-
 export default function DashboardPage() {
   const [stats, setStats] = useState<StatsResponse | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!APPS_SCRIPT_URL) { setLoading(false); return; }
     fetchStats()
       .then(setStats)
       .finally(() => setLoading(false));
@@ -163,11 +143,8 @@ export default function DashboardPage() {
             </div>
           )}
 
-          {/* ── Not configured ── */}
-          {!loading && !APPS_SCRIPT_URL && <NotConfigured/>}
-
           {/* ── No data yet ── */}
-          {!loading && APPS_SCRIPT_URL && stats?.count === 0 && <EmptyState/>}
+          {!loading && stats?.count === 0 && <EmptyState/>}
 
           {/* ── Dashboard ── */}
           {!loading && stats && stats.count > 0 && (

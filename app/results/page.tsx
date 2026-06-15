@@ -10,7 +10,7 @@ import {
 import { DIMENSIONS } from "@/data/questions";
 import { calcScores, getMaturity, scoreToPercent } from "@/lib/scoring";
 import { getRecs } from "@/data/recommendations";
-import { submitResult, APPS_SCRIPT_URL } from "@/lib/sheetsApi";
+import { submitResult } from "@/lib/sheetsApi";
 import type { AssessmentAnswers, DimensionId } from "@/types";
 
 /* Maturity level → icon */
@@ -379,7 +379,7 @@ function ResultsContent() {
           </div>
 
           {/* ── Contribute to community ── */}
-          {APPS_SCRIPT_URL && contributed === "idle" && (
+          {contributed === "idle" && (
             <div className="rounded-2xl border border-indigo-100 bg-indigo-50 p-5
                             flex flex-col sm:flex-row items-start sm:items-center
                             gap-4 print:hidden">
@@ -410,7 +410,7 @@ function ResultsContent() {
             </div>
           )}
 
-          {APPS_SCRIPT_URL && contributed === "loading" && (
+          {contributed === "loading" && (
             <div className="rounded-2xl border border-indigo-100 bg-indigo-50 p-5
                             flex items-center gap-3 text-indigo-700 text-sm print:hidden">
               <div className="w-5 h-5 border-2 border-indigo-300 border-t-indigo-600
@@ -419,7 +419,7 @@ function ResultsContent() {
             </div>
           )}
 
-          {APPS_SCRIPT_URL && contributed === "done" && (
+          {contributed === "done" && (
             <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-5
                             flex items-center justify-between gap-4 print:hidden">
               <div className="flex items-center gap-2.5 text-sm text-emerald-800">
@@ -439,26 +439,11 @@ function ResultsContent() {
             </div>
           )}
 
-          {APPS_SCRIPT_URL && contributed === "error" && (
+          {contributed === "error" && (
             <div className="rounded-2xl border border-red-200 bg-red-50 p-4
                             flex items-center gap-2.5 text-sm text-red-700 print:hidden">
               <span>⚠️</span>
               Không thể lưu lúc này. Vui lòng thử lại sau.
-            </div>
-          )}
-
-          {/* Shortcut to dashboard even without contributing */}
-          {!APPS_SCRIPT_URL && (
-            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4
-                            flex items-center justify-between gap-4 print:hidden">
-              <p className="text-sm text-slate-500">
-                Xem xu hướng kết quả từ cộng đồng HR
-              </p>
-              <Link href="/dashboard"
-                className="flex-shrink-0 px-4 py-2 bg-indigo-600 hover:bg-indigo-700
-                           text-white text-xs font-semibold rounded-xl transition-all">
-                Dashboard →
-              </Link>
             </div>
           )}
 
