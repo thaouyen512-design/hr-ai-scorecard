@@ -21,19 +21,33 @@ function ensureHeaders() {
   return sheet;
 }
 
-/** POST  — save one assessment result (anonymous) */
-function doPost(e) {
+/**
+ * GET handler — two modes:
+ *   ?action=submit&fluency=x&...  →  save one anonymous result
+ *   (no params)                   →  return aggregate stats
+ *
+ * Using GET for submission avoids the POST→GET redirect issue that
+ * Google's infrastructure applies to Apps Script web app URLs.
+ */
+function doGet(e) {
+  if (e && e.parameter && e.parameter.action === "submit") {
+    return handleSubmit(e.parameter);
+  }
+  return getStats();
+}
+
+/** Save one assessment result (called via GET ?action=submit) */
+function handleSubmit(p) {
   try {
-    const data  = JSON.parse(e.postData.contents);
     const sheet = ensureHeaders();
     sheet.appendRow([
       new Date().toISOString(),
-      Number(data.fluency)    || 0,
-      Number(data.governance) || 0,
-      Number(data.techstack)  || 0,
-      Number(data.change)     || 0,
-      Number(data.total)      || 0,
-      String(data.maturity)   || "",
+      Number(p.fluency)    || 0,
+      Number(p.governance) || 0,
+      Number(p.techstack)  || 0,
+      Number(p.change)     || 0,
+      Number(p.total)      || 0,
+      String(p.maturity)   || "",
     ]);
     return respond({ success: true });
   } catch (err) {
@@ -41,8 +55,8 @@ function doPost(e) {
   }
 }
 
-/** GET  — return aggregate stats for the dashboard */
-function doGet() {
+/** Return aggregate stats for the dashboard */
+function getStats() {
   try {
     const sheet = ensureHeaders();
     const rows  = sheet.getDataRange().getValues();
@@ -63,7 +77,6 @@ function doGet() {
 
     const count = data.length;
 
-    // Per-dimension averages
     const avg = {
       fluency:    round(data.reduce((s,d) => s + d.fluency,    0) / count),
       governance: round(data.reduce((s,d) => s + d.governance, 0) / count),
@@ -72,24 +85,31 @@ function doGet() {
       total:      round(data.reduce((s,d) => s + d.total,      0) / count),
     };
 
-    // Score distribution buckets: 1.0-1.5, 1.5-2.0, 2.0-2.5, 2.5-3.0, 3.0-3.5, 3.5-4.0
     const buckets = ["1.0-1.5","1.5-2.0","2.0-2.5","2.5-3.0","3.0-3.5","3.5-4.0"];
     const distribution = buckets.map(label => {
       const [lo, hi] = label.split("-").map(Number);
       return { range: label, count: data.filter(d => d.total >= lo && d.total < hi + 0.001).length };
     });
 
-    // Maturity breakdown
     const maturityBreakdown = { beginner: 0, developing: 0, proficient: 0, advanced: 0 };
     data.forEach(d => { if (d.maturity in maturityBreakdown) maturityBreakdown[d.maturity]++; });
 
-    // Top 25% threshold
-    const sorted  = [...data].map(d => d.total).sort((a,b) => a - b);
-    const top25   = sorted[Math.floor(sorted.length * 0.75)] ?? 4;
+    const sorted = [...data].map(d => d.total).sort((a,b) => a - b);
+    const top25  = sorted[Math.floor(sorted.length * 0.75)] ?? 4;
 
     return respond({ count, avg, distribution, maturityBreakdown, top25 });
   } catch (err) {
     return respond({ error: err.toString() });
+  }
+}
+
+/** Keep doPost as fallback (won't be called due to redirect, but harmless) */
+function doPost(e) {
+  try {
+    const data  = JSON.parse(e.postData.contents);
+    return handleSubmit(data);
+  } catch (err) {
+    return respond({ success: false, error: err.toString() });
   }
 }
 
@@ -99,11 +119,4 @@ function respond(obj) {
   return ContentService
     .createTextOutput(JSON.stringify(obj))
     .setMimeType(ContentService.MimeType.JSON);
-}
-
-/** Required for CORS preflight on some clients */
-function doOptions() {
-  return ContentService
-    .createTextOutput("")
-    .setMimeType(ContentService.MimeType.TEXT);
 }
